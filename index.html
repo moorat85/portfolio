@@ -23,8 +23,8 @@
       --radius:   18px;
       --nav-h:    64px;
       --ease:     cubic-bezier(.25,.46,.45,.94);
-      --cw: clamp(300px, 46.5vw, 670px);
-      --ch: calc(var(--cw) * 0.6507);
+      --cw: clamp(300px, 55vw, 800px);
+      --ch: clamp(169px, 30.9375vw, 450px);
     }
 
     /* ─── RESET ─── */
@@ -254,21 +254,45 @@
       margin-top: 24px;
       max-width: 640px;
     }
+    .brand-chip {
+      display: inline-block;
+      white-space: nowrap;
+      cursor: default;
+      transition: color .2s ease;
+      color: inherit;
+    }
+    .brand-chip:hover {
+      color: var(--fg);
+    }
+    .brand-logo {
+      display: inline-block;
+      height: 1em;
+      width: auto;
+      vertical-align: middle;
+      margin-right: 3px;
+      position: relative;
+      top: -0.05em;
+      filter: grayscale(1);
+      opacity: 0.45;
+      transition: filter .2s ease, opacity .2s ease;
+    }
+    .brand-chip:hover .brand-logo {
+      filter: grayscale(0);
+      opacity: 1;
+    }
 
     /* ─── SECTION SHELL ─── */
     .section {
       padding: 96px 48px;
-      border-top: 1px solid var(--border);
       position: relative;
       z-index: 1;
     }
     .section-label {
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: var(--fg2);
-      margin-bottom: 52px;
+      font-family: 'Unbounded', sans-serif;
+      font-size: clamp(24px, 3.5vw, 46px);
+      font-weight: 400;
+      color: var(--fg);
+      margin-bottom: 31px;
     }
 
     /* ─── WORK GRID ─── */
@@ -277,50 +301,79 @@
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       column-gap: 18px;
-      row-gap: 64px;
+      row-gap: 18px;
     }
+    .work-card, .work-text, .work-empty { }
     .work-card { cursor: default; }
+    .work-card.span-4 { grid-column: span 4; }
     .work-card.span-3 { grid-column: span 3; }
     .work-card.span-2 { grid-column: span 2; }
     .work-card.span-1 { grid-column: span 1; }
 
-    .work-thumb { width: 100%; display: block; object-fit: cover; }
-    .work-card.span-3 .work-thumb { height: 420px; }
-    .work-card.span-2 .work-thumb { height: 320px; }
-    .work-card.span-1 .work-thumb { height: 300px; }
+    .work-card { overflow: visible; }
+    .work-thumb-wrap { overflow: hidden; width: 100%; display: block; }
+    .work-card.span-4 .work-thumb-wrap { height: 600px; }
+    .work-card.span-3 .work-thumb-wrap { height: 600px; }
+    .work-card.span-2 .work-thumb-wrap { height: 600px; }
+    .work-card.span-1 .work-thumb-wrap { height: 600px; }
+    .work-card.work-stretch .work-thumb-wrap { height: 100%; }
+    .work-subgrid .work-thumb-wrap { grid-column: 1 / -1; grid-row: 1; }
+    .work-side .work-thumb-wrap { grid-column: 1; grid-row: 1; height: 100%; }
+    .work-thumb { width: 100%; height: calc(100% + 60px); margin-top: -30px; display: block; object-fit: cover; will-change: transform; }
 
-    .work-text {
+    /* editorial first card — image stretches to right-column height */
+    .work-card.work-stretch .work-thumb { height: calc(100% + 60px); }
+
+    /* right metadata column */
+    .work-meta {
       grid-column: span 1;
       display: flex;
       flex-direction: column;
-      justify-content: flex-end;
-      padding-bottom: 2px;
+      min-height: 600px;
     }
-    .work-text-label {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: .09em;
-      text-transform: uppercase;
-      color: var(--fg2);
-      margin-bottom: 12px;
-    }
-    .work-text-title {
-      font-size: 22px;
+    .work-desc {
+      font-size: 15px;
       font-weight: 400;
-      line-height: 1.25;
-      letter-spacing: -.02em;
-      color: var(--fg);
-    }
-
-    .work-body { padding-top: 14px; }
-    .work-co {
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: .08em;
-      text-transform: uppercase;
+      line-height: 1.6;
       color: var(--fg2);
-      margin-bottom: 5px;
+      margin-top: 4px;
+      max-width: 320px;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
+    .work-desc { display: none; }
+    .work-subgrid {
+      display: grid;
+      grid-template-columns: subgrid;
+    }
+    .work-subgrid .work-thumb { }
+    .work-desc-col2 { grid-column: 2; grid-row: 2; margin-top: 0; padding-top: 14px; max-width: none; }
+    .work-desc-col3 { grid-column: 3; grid-row: 2; margin-top: 0; padding-top: 14px; max-width: none; }
+    .work-desc-cols34 { grid-column: 3; grid-row: 2; max-width: none; margin-top: 0; padding-top: 14px; }
+
+    .work-text { grid-column: span 1; }
+    .work-text.span-2 { grid-column: span 2; }
+    .work-text p {
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.6;
+      color: var(--fg2);
+    }
+    .work-empty { grid-column: span 1; }
+    .work-empty.span-2 { grid-column: span 2; }
+
+    .work-card { position: relative; }
+    .work-body {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 80px 24px 24px;
+      background: linear-gradient(to top, rgba(0,0,0,.75) 0%, rgba(0,0,0,.45) 35%, rgba(0,0,0,.15) 65%, transparent 100%);
+      z-index: 2;
+    }
+    .work-side { display: grid; grid-template-columns: subgrid; }
+    .work-side .work-thumb { height: calc(100% + 60px); }
     .work-title {
       font-size: 18px;
       font-weight: 500;
@@ -438,29 +491,57 @@
     .gallery-item[data-pos="l2"]:hover .gallery-card::after,
     .gallery-item[data-pos="r2"]:hover .gallery-card::after { opacity: 0.55; }
 
-    .gallery-dots {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 8px;
-      margin-top: 32px;
+    .gallery-card img {
+      transition: transform .5s var(--ease);
     }
-    .gallery-dot {
-      width: 7px;
-      height: 7px;
+    .gallery-item[data-pos="c"] .gallery-card:hover img {
+      transform: scale(1.03);
+    }
+    .gallery-play {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 96px; height: 96px;
       border-radius: 50%;
-      background: rgba(255,255,255,0.28);
-      transition: background .25s var(--ease), transform .2s var(--ease);
-      flex-shrink: 0;
+      background: rgba(255,255,255,0.22);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0;
+      transition: opacity .35s var(--ease), background .2s var(--ease), transform .2s var(--ease);
+      pointer-events: none;
+      z-index: 3;
     }
-    .gallery-dot.active {
-      background: rgba(255,255,255,0.90);
+    .gallery-item[data-pos="c"] .gallery-play {
+      opacity: 1;
     }
+    .gallery-item[data-pos="c"] .gallery-card:hover .gallery-play {
+      background: rgba(255,255,255,0.24);
+      transform: translate(-50%, -50%) scale(1.08);
+    }
+    .gallery-body {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 60px 20px 20px;
+      z-index: 2;
+      text-align: center;
+      opacity: 0;
+      transition: opacity .35s var(--ease);
+    }
+    .gallery-item[data-pos="c"] .gallery-body {
+      opacity: 1;
+    }
+    .gallery-title {
+      font-size: 18px;
+      font-weight: 500;
+      letter-spacing: -.01em;
+      line-height: 1.3;
+      color: var(--fg);
+    }
+
+    .gallery-item[data-pos="c"][data-youtube] { cursor: pointer; }
 
     /* ─── CONTACT ─── */
     .contact {
       padding: 96px 48px 80px;
-      border-top: 1px solid var(--border);
       position: relative;
       z-index: 1;
     }
@@ -553,9 +634,9 @@
       .hero-bio { text-align: left; max-width: 100%; }
       .section { padding: 72px 24px; }
       .work-grid { grid-template-columns: 1fr 1fr; column-gap: 14px; row-gap: 36px; }
-      .work-card, .work-text { grid-column: auto !important; }
+      .work-card { grid-column: auto !important; }
       .work-thumb { height: 200px !important; }
-      .work-text { display: none; }
+      .work-text, .work-empty { display: none; }
       .career-item { grid-template-columns: 1fr; gap: 12px; }
       .contact { padding: 72px 24px 60px; }
       .contact-grid { grid-template-columns: 1fr; border-top: none; }
@@ -635,7 +716,7 @@
     <span style="white-space:nowrap">50&nbsp;000 человек <em>ежедневно</em></span>
   </h1>
   <p class="hero-sub" data-i18n="hero-sub">
-    От мобильных приложений до сложных B2B-систем. Работал с&nbsp;Dodo Pizza, Drinkit, Tooba и&nbsp;другими
+    От мобильных приложений до сложных B2B-систем. Работал с&nbsp;<span class="brand-chip"><img src="img/Dodo%20Logo.png" alt="" class="brand-logo">Dodo Pizza</span>, <span class="brand-chip"><img src="img/Drinkit%20Logo.png" alt="" class="brand-logo">Drinkit</span>, <span class="brand-chip"><img src="img/Tooba%20Logo.png" alt="" class="brand-logo">Tooba</span> и&nbsp;другими
   </p>
 </section>
 
@@ -645,97 +726,68 @@
   <p class="section-label" data-i18n="work-label">Проекты</p>
   <div class="work-grid">
 
-    <!-- row 1: 3 + 1 -->
-    <div class="work-card span-3 reveal">
-      <img class="work-thumb" src="https://picsum.photos/seed/work01/1400/420" alt="">
+    <!-- row 1: Умная выдача (4) -->
+    <div class="work-card span-4 no-parallax reveal">
+      <img class="work-thumb" src="img/smart-pickup-main.png" alt="">
       <div class="work-body">
-        <p class="work-co">Dodo Brands · Drinkit</p>
-        <h3 class="work-title" data-i18n="work-drinkit">Умная выдача заказов</h3>
-      </div>
-    </div>
-    <div class="work-text reveal">
-      <p class="work-text-label">Документация · Drinkit</p>
-      <p class="work-text-title">Инструкции для умной выдачи</p>
-    </div>
-
-    <!-- row 2: 2 + 2 -->
-    <div class="work-card span-2 reveal">
-      <img class="work-thumb" src="https://picsum.photos/seed/work02/900/320" alt="">
-      <div class="work-body">
-        <p class="work-co">Dodo Brands</p>
-        <h3 class="work-title" data-i18n="work-1">Курьерское приложение</h3>
-      </div>
-    </div>
-    <div class="work-card span-2 reveal">
-      <img class="work-thumb" src="https://picsum.photos/seed/work03/900/320" alt="">
-      <div class="work-body">
-        <p class="work-co">Dodo Brands</p>
-        <h3 class="work-title" data-i18n="work-2">Терминал доставки</h3>
+        <h3 class="work-title" data-i18n="work-drinkit">Умная выдача заказов Дринкит</h3>
+        <p class="work-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
       </div>
     </div>
 
-    <!-- row 3: 1 + 2 + 1 -->
-    <div class="work-card span-1 reveal">
-      <img class="work-thumb" src="https://picsum.photos/seed/work04/400/300" alt="">
-      <div class="work-body">
-        <p class="work-co">Dodo Brands</p>
-        <h3 class="work-title" data-i18n="work-3">Трекинг приготовления</h3>
-      </div>
-    </div>
-    <div class="work-card span-2 reveal">
-      <img class="work-thumb" src="https://picsum.photos/seed/work05/900/300" alt="">
-      <div class="work-body">
-        <p class="work-co">Dodo Brands</p>
-        <h3 class="work-title" data-i18n="work-4">Ревизия остатков</h3>
-      </div>
-    </div>
-    <div class="work-text reveal">
-      <p class="work-text-label">Dodo Brands · 2021 — 2024</p>
-      <p class="work-text-title">5 продуктов для одной экосистемы</p>
-    </div>
-
-    <!-- row 4: 1 + 3 -->
-    <div class="work-text reveal">
-      <p class="work-text-label">Tooba · 2024 — н.в.</p>
-      <p class="work-text-title">Первый проект вне фудтеха</p>
-    </div>
-    <div class="work-card span-3 reveal">
-      <img class="work-thumb" src="https://picsum.photos/seed/work06/1400/420" alt="">
-      <div class="work-body">
-        <p class="work-co">Tooba</p>
-        <h3 class="work-title" data-i18n="work-5">Панель администратора</h3>
-      </div>
-    </div>
-
-    <!-- row 5: 2 + 2 -->
+    <!-- row 2: Аналитика (2) + Терминал (2) -->
     <div class="work-card span-2 reveal">
       <img class="work-thumb" src="https://picsum.photos/seed/work07/900/320" alt="">
       <div class="work-body">
-        <p class="work-co">TED Trans</p>
-        <h3 class="work-title" data-i18n="work-6">Личный кабинет клиента</h3>
+        <h3 class="work-title" data-i18n="work-7">Аналитика города Гетплейса</h3>
+        <p class="work-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
       </div>
     </div>
     <div class="work-card span-2 reveal">
-      <img class="work-thumb" src="https://picsum.photos/seed/work08/900/320" alt="">
+      <video class="work-thumb" src="img/term-dost-1200.mp4" autoplay muted loop playsinline></video>
       <div class="work-body">
-        <p class="work-co">Getplace</p>
-        <h3 class="work-title" data-i18n="work-7">Аналитика города</h3>
+        <h3 class="work-title" data-i18n="work-2">Терминал доставки Додо Пиццы</h3>
+        <p class="work-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
       </div>
     </div>
 
-    <!-- row 6: 3 + 1 -->
-    <div class="work-card span-3 reveal">
-      <img class="work-thumb" src="https://picsum.photos/seed/work09/1400/420" alt="">
+    <!-- row 4: Курьерское (1) + Tooba (3) -->
+    <div class="work-card span-1 reveal">
+      <img class="work-thumb" src="img/courier-app.webp" alt="">
       <div class="work-body">
-        <p class="work-co">ITLE Kitchen</p>
-        <h3 class="work-title" data-i18n="work-8">Приложения для цеха</h3>
+        <h3 class="work-title" data-i18n="work-1">Приложение для курьеров Додо Пиццы</h3>
+        <p class="work-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      </div>
+    </div>
+    <div class="work-card span-3 work-subgrid reveal">
+      <img class="work-thumb" src="img/tooba-admin.avif" alt="">
+      <div class="work-body">
+        <h3 class="work-title" data-i18n="work-5">Панель администратора Тубы</h3>
+      </div>
+      <p class="work-desc work-desc-col2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      <p class="work-desc work-desc-col3">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    </div>
+
+    <!-- row 7: Ревизия (2) + TED Trans (1) + ITLE (1) -->
+    <div class="work-card span-2 reveal">
+      <img class="work-thumb" src="https://picsum.photos/seed/work05/900/300" alt="">
+      <div class="work-body">
+        <h3 class="work-title" data-i18n="work-4">Ревизия остатков Додо Пиццы и Дринкит</h3>
+        <p class="work-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
       </div>
     </div>
     <div class="work-card span-1 reveal">
-      <img class="work-thumb" src="https://picsum.photos/seed/work10/400/420" alt="">
+      <video class="work-thumb" src="img/ted-1200.mp4" autoplay muted loop playsinline></video>
       <div class="work-body">
-        <p class="work-co">ITLE Kitchen</p>
-        <h3 class="work-title" data-i18n="work-9">Курьерское приложение</h3>
+        <h3 class="work-title" data-i18n="work-6">Личный кабинет клиента ТЭД&nbsp;Транс</h3>
+        <p class="work-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
+      </div>
+    </div>
+    <div class="work-card span-1 reveal">
+      <img class="work-thumb" src="https://picsum.photos/seed/work09/400/300" alt="">
+      <div class="work-body">
+        <h3 class="work-title" data-i18n="work-8">Приложение для цеха ИТЛЕ&nbsp;Китчен</h3>
+        <p class="work-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
       </div>
     </div>
 
@@ -807,19 +859,12 @@
   <div class="talks-gallery">
     <div class="gallery-track">
 
-      <div class="gallery-item" data-pos="c"><div class="gallery-card"><img src="img/talk-3.jpg" alt=""></div></div>
-      <div class="gallery-item" data-pos="r1"><div class="gallery-card"><img src="img/talk-4.jpg" alt=""></div></div>
-      <div class="gallery-item" data-pos="r2"><div class="gallery-card"><img src="img/talk-5.jpg" alt=""></div></div>
-      <div class="gallery-item" data-pos="l2"><div class="gallery-card"></div></div>
-      <div class="gallery-item" data-pos="l1"><div class="gallery-card"></div></div>
+      <div class="gallery-item" data-pos="c"  data-youtube="0DeOs0BjQH0"><div class="gallery-card"><img src="img/talk-5.jpg" alt=""><div class="gallery-play"><svg width="26" height="30" viewBox="-2 0 20 24" fill="white"><path d="M0 0l20 12L0 24V0z"/></svg></div><div class="gallery-body"><p class="gallery-title">Рассказ о себе</p></div></div></div>
+      <div class="gallery-item" data-pos="r1" data-youtube="6-sy8YhiCKU?t=247"><div class="gallery-card"><img src="img/talk-3.jpg" alt=""><div class="gallery-play"><svg width="26" height="30" viewBox="-2 0 20 24" fill="white"><path d="M0 0l20 12L0 24V0z"/></svg></div><div class="gallery-body"><p class="gallery-title">Дизайн-система Dodo IS</p></div></div></div>
+      <div class="gallery-item" data-pos="r2" data-youtube="cFQyn5yQHm0?t=573"><div class="gallery-card"><img src="img/talk-4.jpg" alt=""><div class="gallery-play"><svg width="26" height="30" viewBox="-2 0 20 24" fill="white"><path d="M0 0l20 12L0 24V0z"/></svg></div><div class="gallery-body"><p class="gallery-title">Оценка заказа в мобильном приложении</p></div></div></div>
+      <div class="gallery-item" data-pos="l2" data-youtube="https://www.youtube.com/live/CFxvzXcE-kc?t=313"><div class="gallery-card"><img src="img/talk-2.jpg" alt=""><div class="gallery-play"><svg width="26" height="30" viewBox="-2 0 20 24" fill="white"><path d="M0 0l20 12L0 24V0z"/></svg></div><div class="gallery-body"><p class="gallery-title">Выступление на Dodo Future Week</p></div></div></div>
+      <div class="gallery-item" data-pos="l1" data-youtube="https://www.youtube.com/live/aSa4tvC-gho?t=373"><div class="gallery-card"><img src="img/talk-1.png" alt=""><div class="gallery-play"><svg width="26" height="30" viewBox="-2 0 20 24" fill="white"><path d="M0 0l20 12L0 24V0z"/></svg></div><div class="gallery-body"><p class="gallery-title">Продуктовый дизайн в фудтехе</p></div></div></div>
 
-    </div>
-    <div class="gallery-dots">
-      <span class="gallery-dot"></span>
-      <span class="gallery-dot"></span>
-      <span class="gallery-dot"></span>
-      <span class="gallery-dot"></span>
-      <span class="gallery-dot"></span>
     </div>
   </div>
 
@@ -828,10 +873,7 @@
 
 <!-- ════════════════════ CONTACT ════════════════════ -->
 <section class="contact" id="contact" aria-label="Контакты">
-  <h2 class="contact-headline reveal" data-i18n="contact-headline">
-    Давайте<br>
-    <span class="dim">работать вместе</span>
-  </h2>
+  <p class="section-label" data-i18n="contact-label">Контакты</p>
   <div class="contact-grid">
     <div class="contact-cell">
       <span class="contact-lbl" data-i18n="lbl-phone">Телефон</span>
@@ -1000,7 +1042,6 @@
   /* talks gallery — infinite carousel */
   (function () {
     const items = Array.from(document.querySelectorAll('.gallery-item'));
-    const dots  = Array.from(document.querySelectorAll('.gallery-dot'));
     const track = document.querySelector('.gallery-track');
     if (!items.length) return;
 
@@ -1015,7 +1056,6 @@
         const d = ((i - curr) % N + N) % N;
         el.dataset.pos = POSITIONS[d] ?? 'hidden-r';
       });
-      dots.forEach((d, i) => d.classList.toggle('active', i === curr));
     }
 
     function go(dir) {  // -1 = next (right item to center), +1 = prev (left item to center)
@@ -1052,7 +1092,7 @@
 
     render();
 
-    /* click on side items */
+    /* click on side items / center opens video */
     let dragMoved = false;
     items.forEach(el => {
       el.addEventListener('click', () => {
@@ -1060,6 +1100,10 @@
         const p = el.dataset.pos;
         if (p === 'l1' || p === 'l2') go(+1);
         if (p === 'r1' || p === 'r2') go(-1);
+        if (p === 'c' && el.dataset.youtube) {
+          const yt = el.dataset.youtube;
+          window.open(yt.startsWith('http') ? yt : `https://youtu.be/${yt}`, '_blank');
+        }
       });
     });
 
@@ -1125,15 +1169,15 @@
       'stat-companies':    'компаний',
       'stat-b2c':          'и B2C продукты',
       'work-label':        'Проекты',
-      'work-drinkit':      'Умная выдача заказов',
-      'work-1':            'Курьерское приложение',
-      'work-2':            'Терминал доставки',
+      'work-drinkit':      'Умная выдача заказов Дринкит',
+      'work-1':            'Приложение для курьеров Додо Пиццы',
+      'work-2':            'Терминал доставки Додо Пиццы',
       'work-3':            'Трекинг приготовления',
-      'work-4':            'Ревизия остатков',
-      'work-5':            'Панель администратора',
-      'work-6':            'Личный кабинет клиента',
-      'work-7':            'Аналитика города',
-      'work-8':            'Приложения для цеха',
+      'work-4':            'Ревизия остатков Додо Пиццы и Дринкит',
+      'work-5':            'Панель администратора Тубы',
+      'work-6':            'Личный кабинет клиента ТЭД Транс',
+      'work-7':            'Аналитика города Гетплейса',
+      'work-8':            'Приложение для цеха ИТЛЕ Китчен',
       'work-9':            'Курьерское приложение',
       'tag-mobile':        'Мобильный',
       'tag-tool':          'Инструмент',
@@ -1148,6 +1192,7 @@
       'role-b2b-lead':     'Дизайн-лид B2B',
       'role-dodo-is':      'Дизайнер Dodo IS',
       'talks-label':       'Выступления',
+      'contact-label':     'Контакты',
       'talk-1':            'Дизайн-система Dodo IS',
       'talk-2':            'Оценка заказа в&nbsp;мобильном приложении',
       'talk-badge':        'Доклад',
@@ -1169,15 +1214,15 @@
       'stat-companies':    'companies',
       'stat-b2c':          '& B2C products',
       'work-label':        'Work',
-      'work-drinkit':      'Smart Order Display',
-      'work-1':            'Courier App',
-      'work-2':            'Delivery Terminal',
+      'work-drinkit':      'Drinkit Smart Order Display',
+      'work-1':            'Dodo Pizza Courier App',
+      'work-2':            'Dodo Pizza Delivery Terminal',
       'work-3':            'Cooking Tracker',
-      'work-4':            'Stock Audit',
+      'work-4':            'Dodo Pizza & Drinkit Stock Audit',
       'work-5':            'Admin Panel',
-      'work-6':            'Client Dashboard',
-      'work-7':            'City Analytics',
-      'work-8':            'Workshop Apps',
+      'work-6':            'TED Trans Client Dashboard',
+      'work-7':            'Getplace City Analytics',
+      'work-8':            'ITLE Kitchen Workshop App',
       'work-9':            'Courier App',
       'tag-mobile':        'Mobile',
       'tag-tool':          'Tool',
@@ -1192,6 +1237,7 @@
       'role-b2b-lead':     'B2B Design Lead',
       'role-dodo-is':      'Dodo IS Designer',
       'talks-label':       'Talks',
+      'contact-label':     'Contacts',
       'talk-1':            'Dodo IS Design System',
       'talk-2':            'Order Rating in&nbsp;Mobile App',
       'talk-badge':        'Talk',
@@ -1233,7 +1279,50 @@
 
     requestAnimationFrame(() => movePill(btns[0]));
   })();
+
+  // ─── PARALLAX ───
+  (function() {
+    const FACTOR = 0.047;
+    const LERP   = 0.09;
+
+    document.querySelectorAll('.work-card .work-thumb').forEach(img => {
+      const wrap = document.createElement('div');
+      wrap.className = 'work-thumb-wrap';
+      img.parentNode.insertBefore(wrap, img);
+      wrap.appendChild(img);
+    });
+
+    const imgs    = Array.from(document.querySelectorAll('.work-card:not(.no-parallax) .work-thumb'));
+    const current = new Float32Array(imgs.length);
+    const target  = new Float32Array(imgs.length);
+
+    function readTargets() {
+      const vh = window.innerHeight;
+      imgs.forEach((img, i) => {
+        const rect   = img.parentNode.getBoundingClientRect();
+        const center = rect.top + rect.height / 2;
+        target[i] = (center - vh / 2) * FACTOR;
+      });
+    }
+
+    readTargets();
+    imgs.forEach((img, i) => { current[i] = target[i]; });
+
+    function tick() {
+      readTargets();
+      imgs.forEach((img, i) => {
+        current[i] += (target[i] - current[i]) * LERP;
+        img.style.transform = `translateY(${current[i].toFixed(2)}px)`;
+      });
+      requestAnimationFrame(tick);
+    }
+
+    window.addEventListener('resize', readTargets, { passive: true });
+    requestAnimationFrame(tick);
+  })();
+
 </script>
+
 
 </body>
 </html>
