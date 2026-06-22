@@ -257,9 +257,10 @@
     .brand-chip {
       display: inline-block;
       white-space: nowrap;
-      cursor: default;
+      cursor: pointer;
       transition: color .2s ease;
       color: inherit;
+      text-decoration: none;
     }
     .brand-chip:hover {
       color: var(--fg);
@@ -716,7 +717,7 @@
     <span style="white-space:nowrap">50&nbsp;000 человек <em>ежедневно</em></span>
   </h1>
   <p class="hero-sub" data-i18n="hero-sub">
-    От мобильных приложений до сложных B2B-систем. Работал с&nbsp;<span class="brand-chip"><img src="img/Dodo%20Logo.png" alt="" class="brand-logo">Dodo Pizza</span>, <span class="brand-chip"><img src="img/Drinkit%20Logo.png" alt="" class="brand-logo">Drinkit</span>, <span class="brand-chip"><img src="img/Tooba%20Logo.png" alt="" class="brand-logo">Tooba</span> и&nbsp;другими
+    От мобильных приложений до сложных B2B-систем. Работал с&nbsp;<a class="brand-chip" href="#work-delivery-terminal"><img src="img/Dodo%20Logo.png" alt="" class="brand-logo">Dodo Pizza</a>, <a class="brand-chip" href="#work-smart-pickup"><img src="img/Drinkit%20Logo.png" alt="" class="brand-logo">Drinkit</a>, <a class="brand-chip" href="#work-tooba"><img src="img/Tooba%20Logo.png" alt="" class="brand-logo">Tooba</a> и&nbsp;другими
   </p>
 </section>
 
@@ -727,7 +728,7 @@
   <div class="work-grid">
 
     <!-- row 1: Умная выдача (4) -->
-    <div class="work-card span-4 no-parallax reveal">
+    <div class="work-card span-4 no-parallax reveal" id="work-smart-pickup">
       <img class="work-thumb" src="img/smart-pickup-main.png" alt="">
       <div class="work-body">
         <h3 class="work-title" data-i18n="work-drinkit">Умная выдача заказов Дринкит</h3>
@@ -737,14 +738,14 @@
 
     <!-- row 2: Аналитика (2) + Терминал (2) -->
     <div class="work-card span-2 reveal">
-      <img class="work-thumb" src="https://picsum.photos/seed/work07/900/320" alt="">
+      <img class="work-thumb" src="img/getplace-img-main.jpg" alt="">
       <div class="work-body">
         <h3 class="work-title" data-i18n="work-7">Аналитика города Гетплейса</h3>
         <p class="work-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
       </div>
     </div>
-    <div class="work-card span-2 reveal">
-      <video class="work-thumb" src="img/term-dost-1200.mp4" autoplay muted loop playsinline></video>
+    <div class="work-card span-2 reveal" id="work-delivery-terminal">
+      <img class="work-thumb" src="img/delivery-term-img-main.jpg" alt="">
       <div class="work-body">
         <h3 class="work-title" data-i18n="work-2">Терминал доставки Додо Пиццы</h3>
         <p class="work-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
@@ -753,14 +754,14 @@
 
     <!-- row 4: Курьерское (1) + Tooba (3) -->
     <div class="work-card span-1 reveal">
-      <img class="work-thumb" src="img/courier-app.webp" alt="">
+      <img class="work-thumb" src="img/courier-app.jpg" alt="">
       <div class="work-body">
         <h3 class="work-title" data-i18n="work-1">Приложение для курьеров Додо Пиццы</h3>
         <p class="work-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
       </div>
     </div>
-    <div class="work-card span-3 work-subgrid reveal">
-      <img class="work-thumb" src="img/tooba-admin.avif" alt="">
+    <div class="work-card span-3 work-subgrid reveal" id="work-tooba">
+      <img class="work-thumb" src="img/tooba-mimg-main.jpg" alt="">
       <div class="work-body">
         <h3 class="work-title" data-i18n="work-5">Панель администратора Тубы</h3>
       </div>
@@ -770,21 +771,21 @@
 
     <!-- row 7: Ревизия (2) + TED Trans (1) + ITLE (1) -->
     <div class="work-card span-2 reveal">
-      <img class="work-thumb" src="https://picsum.photos/seed/work05/900/300" alt="">
+      <img class="work-thumb" src="img/revision-img-main.jpg" alt="">
       <div class="work-body">
         <h3 class="work-title" data-i18n="work-4">Ревизия остатков Додо Пиццы и Дринкит</h3>
         <p class="work-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
       </div>
     </div>
     <div class="work-card span-1 reveal">
-      <video class="work-thumb" src="img/ted-1200.mp4" autoplay muted loop playsinline></video>
+      <img class="work-thumb" src="img/ted-trans-main.jpg" alt="">
       <div class="work-body">
         <h3 class="work-title" data-i18n="work-6">Личный кабинет клиента ТЭД&nbsp;Транс</h3>
         <p class="work-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
       </div>
     </div>
     <div class="work-card span-1 reveal">
-      <img class="work-thumb" src="https://picsum.photos/seed/work09/400/300" alt="">
+      <img class="work-thumb" src="img/itle-main.jpg" alt="">
       <div class="work-body">
         <h3 class="work-title" data-i18n="work-8">Приложение для цеха ИТЛЕ&nbsp;Китчен</h3>
         <p class="work-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
@@ -863,7 +864,7 @@
       <div class="gallery-item" data-pos="r1" data-youtube="6-sy8YhiCKU?t=247"><div class="gallery-card"><img src="img/talk-3.jpg" alt=""><div class="gallery-play"><svg width="26" height="30" viewBox="-2 0 20 24" fill="white"><path d="M0 0l20 12L0 24V0z"/></svg></div><div class="gallery-body"><p class="gallery-title">Дизайн-система Dodo IS</p></div></div></div>
       <div class="gallery-item" data-pos="r2" data-youtube="cFQyn5yQHm0?t=573"><div class="gallery-card"><img src="img/talk-4.jpg" alt=""><div class="gallery-play"><svg width="26" height="30" viewBox="-2 0 20 24" fill="white"><path d="M0 0l20 12L0 24V0z"/></svg></div><div class="gallery-body"><p class="gallery-title">Оценка заказа в мобильном приложении</p></div></div></div>
       <div class="gallery-item" data-pos="l2" data-youtube="https://www.youtube.com/live/CFxvzXcE-kc?t=313"><div class="gallery-card"><img src="img/talk-2.jpg" alt=""><div class="gallery-play"><svg width="26" height="30" viewBox="-2 0 20 24" fill="white"><path d="M0 0l20 12L0 24V0z"/></svg></div><div class="gallery-body"><p class="gallery-title">Выступление на Dodo Future Week</p></div></div></div>
-      <div class="gallery-item" data-pos="l1" data-youtube="https://www.youtube.com/live/aSa4tvC-gho?t=373"><div class="gallery-card"><img src="img/talk-1.png" alt=""><div class="gallery-play"><svg width="26" height="30" viewBox="-2 0 20 24" fill="white"><path d="M0 0l20 12L0 24V0z"/></svg></div><div class="gallery-body"><p class="gallery-title">Продуктовый дизайн в фудтехе</p></div></div></div>
+      <div class="gallery-item" data-pos="l1" data-youtube="https://www.youtube.com/live/aSa4tvC-gho?t=373"><div class="gallery-card"><img src="img/talk-1.jpg" alt=""><div class="gallery-play"><svg width="26" height="30" viewBox="-2 0 20 24" fill="white"><path d="M0 0l20 12L0 24V0z"/></svg></div><div class="gallery-body"><p class="gallery-title">Рассказ об умной выдаче</p></div></div></div>
 
     </div>
   </div>
@@ -873,7 +874,7 @@
 
 <!-- ════════════════════ CONTACT ════════════════════ -->
 <section class="contact" id="contact" aria-label="Контакты">
-  <p class="section-label" data-i18n="contact-label">Контакты</p>
+  <p class="section-label" data-i18n="contact-label">Связаться со мной</p>
   <div class="contact-grid">
     <div class="contact-cell">
       <span class="contact-lbl" data-i18n="lbl-phone">Телефон</span>
@@ -1192,7 +1193,7 @@
       'role-b2b-lead':     'Дизайн-лид B2B',
       'role-dodo-is':      'Дизайнер Dodo IS',
       'talks-label':       'Выступления',
-      'contact-label':     'Контакты',
+      'contact-label':     'Связаться со мной',
       'talk-1':            'Дизайн-система Dodo IS',
       'talk-2':            'Оценка заказа в&nbsp;мобильном приложении',
       'talk-badge':        'Доклад',
